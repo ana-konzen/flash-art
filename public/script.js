@@ -54,8 +54,8 @@ async function sendImage() {
       fileLabel.style.background = "black";
       fileLabel.innerHTML = "choose file";
       loadingBuffer.style.display = "none";
-      const artCanvas = new p5(s);
-      artCanvas.allData = artData;
+      // const artCanvas = new p5(s);
+      // artCanvas.allData = artData;
       await getArtists();
     } catch (error) {
       console.error(error);
@@ -69,6 +69,7 @@ async function getArtists() {
   const artists = await result.json();
   console.log(artists);
   createArtistInfo(artists[artists.length - 1]);
+  // artCanvas.allData = artists[artists.length - 1];
   listArtists(artists);
 }
 
@@ -80,9 +81,9 @@ function listArtists(artists) {
     artistBtn.classList.add("copy");
     artistList.appendChild(artistBtn);
     artistBtn.addEventListener("click", () => {
-      console.log(artist.contrast);
-      // const artCanvas = new p5(s);
-      // artCanvas.allData = artist;
+      const artCanvas = new p5(s);
+      artCanvas.artData = artist;
+      // artCanvas.redrawCanvas();
       createArtistInfo(artist);
     });
   });
@@ -94,7 +95,6 @@ function createArtistInfo(artist) {
   const colorPalette = document.createElement("div");
   colorPalette.classList.add("colorPalette");
   for (const color of artist.color) {
-    console.log(color);
     const colorDiv = document.createElement("div");
     colorDiv.style.backgroundColor = color;
     colorPalette.appendChild(colorDiv);

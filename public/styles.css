@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+canvas {
+  position: fixed;
+  top: 100px;
+  left: 300px;
+  border: solid black 1px;
+}
+
 #loading {
   position: fixed;
   width: 50px;
