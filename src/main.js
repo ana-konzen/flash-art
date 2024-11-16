@@ -4,6 +4,8 @@ import { createExitSignal, staticServer } from "./shared/server.ts";
 
 import { getAfinn } from "./afinn.js";
 
+import { getExample } from "./example.js";
+
 import { gpt } from "./shared/openai.ts";
 
 const kv = await Deno.openKv();
@@ -13,6 +15,11 @@ const router = new Router();
 
 const artists = await kv.list({ prefix: ["art_info"] });
 console.log(artists);
+if (artists.length === 0) {
+  const example = getExample();
+  const result = await kv.set(["art_info", example.artist], example);
+  console.log(result);
+}
 for await (const artist of artists) {
   console.log(artist.key);
   console.log(artist.value);
