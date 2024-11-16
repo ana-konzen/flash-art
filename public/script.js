@@ -1,7 +1,6 @@
 const sendElement = document.getElementById("send");
 const imageInput = document.getElementById("imageInput");
 const loadingBuffer = document.getElementById("loading");
-const infoCont = document.getElementById("imageInfo");
 const artistFirstName = document.getElementById("artistFirstName");
 const artistLastName = document.getElementById("artistLastName");
 const artistList = document.getElementById("artistList");
@@ -24,7 +23,6 @@ imageInput.addEventListener("change", () => {
 });
 
 sendElement.addEventListener("click", async () => {
-  infoCont.innerHTML = "";
   artImg.src = "";
   loadingBuffer.style.display = "block";
 
