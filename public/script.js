@@ -8,7 +8,12 @@ const artistList = document.getElementById("artistList");
 const artImg = document.getElementById("artImg");
 const fileLabel = document.getElementById("fileLabel");
 
+// const indexes = [];
+let artCanvas;
+
 getArtists();
+
+// const artCanvas = new p5(s);
 
 imageInput.addEventListener("change", () => {
   if (imageInput.files.length === 0) {
@@ -69,20 +74,25 @@ async function getArtists() {
   const artists = await result.json();
   console.log(artists);
   createArtistInfo(artists[artists.length - 1]);
-  // artCanvas.allData = artists[artists.length - 1];
+  // artCanvas.artData = artists[artists.length - 1];
   listArtists(artists);
 }
 
 function listArtists(artists) {
   artistList.innerHTML = "";
-  artists.forEach((artist) => {
+  artists.forEach((artist, index) => {
     const artistBtn = document.createElement("button");
     artistBtn.innerHTML = artist.artist;
     artistBtn.classList.add("copy");
     artistList.appendChild(artistBtn);
     artistBtn.addEventListener("click", () => {
-      const artCanvas = new p5(s);
-      artCanvas.artData = artist;
+      indexes.push(index);
+      artCanvas = new p5(s);
+      artCanvas.allData = artists;
+      artCanvas.seedNumber = 50;
+
+      // artCanvas.artData = artist;
+
       // artCanvas.redrawCanvas();
       createArtistInfo(artist);
     });
