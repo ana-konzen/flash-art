@@ -12,24 +12,54 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div id = "options">
+      <button id="infoButton">analysis breakdown</button>
+      <button id="uploadButton">upload artist</button>
+      <button id="listButton">artist list</button>
+      <button id="genButton">generator</button>
+  </div>
+
     <div id="loading"></div>
 
-    <div id="leftCont">
-      <!-- <h2 id="header">art analyzer</h2> -->
-      <div id="formCont">
-        <!-- <h3 id="formTitle">upload your image</h3> -->
-         <label for="artistFirstName" class="copy">artist</label>
-         <input id="artistFirstName" type="text" placeholder="artist first name" />
-          <input id="artistLastName" type="text" placeholder="artist last name" />
+    <div id = "menu">
+      <div id="formCont" class="container"> 
+        <p class="copy">artist first name<input id="artistFirstName" type="text"  /></p>
+        <p class="copy">artist last name<input id="artistLastName" type="text"  /></p>
         <label for="imageInput" class="button" id="fileLabel">choose file</label>
         <input id="imageInput" type="file" accept="image/png, image/jpeg" />
         <button id="send" class="button copy">send</button>
-      </div>
-      <div id="imgContainer">
-        <img id="artImg" />
-      </div>
-      <div id="artistList"></div>
+        <p id="errorMessage">oops! please make sure all fields <br> are filled correctly</p>
+       </div>
+       <div id="infoCont" class="container">
+        <p class="titles">artist</p>
+        <p class ="items" id="artistName"></p>
+        <p class="titles">color</p>
+        <div class="items" id="palette"></div>
+        <p class="titles">sentiment scale</p>
+        <p class="items" id="mood"></p>
+        <p class="titles">style</p>
+        <p class="items" id="styles"></p>
+        <p class="titles">shapes</p>
+        <p class="items" id="shapes"></p>
+        <p class="titles">contrast</p>
+        <p class="items" id="contrast"></p> 
     </div>
+       <div id="artistList" class="container"></div>
+       <div id="generatorCont" class="container">
+        <div id="column1">
+            <div id="row1" class="sign row"></div>
+            <div id="row2" class="sign row"></div>
+            <div id="row3" class="artist row"></div>
+        </div>
+        <div id="column2">
+            <button id="clearButton">clear layer</button>
+        </div>
+      </div>
+     
+    </div>
+
+
+
     <div id="artistInfo"></div>
 
     <script src="libraries/p5.min.js"></script>
@@ -37,6 +67,8 @@
     <script src ="libraries/p5.brush.js"></script>
     <script src="logo.js"></script>
     <script src="sketch.js"></script>
+    <script src="menu.js"></script>
     <script src="script.js"></script>
+
   </body>
 </html>

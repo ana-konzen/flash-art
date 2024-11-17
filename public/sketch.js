@@ -1,6 +1,8 @@
 let indexes = [];
 
-const s = function (p) {
+const logoLayer = function (p) {
+  brush.instance(p);
+
   p.afinn;
   p.allData;
   p.palette;
@@ -9,69 +11,56 @@ const s = function (p) {
   p.scores = [];
   p.seedNumber = 50;
 
-  p.cnv;
-  brush.instance(p);
-
   p.font;
-
-  p.shapes = ["circular", "organic", "sharp", "textBool", "linear", "rectangular", "geometric"];
-
-  p.styles = [
-    "avantgarde",
-    "radical",
-    "minimalist",
-    "constrained",
-    "classic",
-    "expressionist",
-    "maximalist",
-    "chaotic",
-  ];
 
   p.preload = function () {
     p.afinn = p.loadJSON("afinn.json");
     p.font = p.loadFont("AlteHaasGroteskBold.ttf");
   };
   p.setup = function () {
-    p.cnv = p.createCanvas(1400, 800, p.WEBGL);
-    positionCanvas(p);
-
-    // p.cnv.position(200, 100);
-
-    // p.background(255);
+    p.createCanvas(800, 400, p.WEBGL);
     p.angleMode(p.DEGREES);
-    // console.log(p.artData);
-
     brush.load();
+    brush.colorCache(false);
+    p.noStroke();
   };
 
   p.draw = function () {
     p.randomSeed(p.seedNumber);
+    brush.seed(p.seedNumber);
 
     p.noLoop();
-    p.translate(-p.width / 2, -p.height / 2 + 100);
     p.background(255);
+
+    drawFlashArt(p);
 
     for (const index of indexes) {
       getAssets(index, p);
       p.push();
       brush.push();
-      p.noStroke();
       p.noFill();
       createLayer(p);
       brush.pop();
       p.pop();
     }
   };
-
-  p.redrawCanvas = function () {
-    p.clear();
-    p.redraw();
-    brush.reDraw();
-  };
 };
 
-function positionCanvas(p = p5.instance) {
-  let x = p.windowWidth / 2 - p.width / 2;
-  let y = 50;
-  p.cnv.position(500, y);
-}
+const clearCanvas = function (p) {
+  brush.instance(p);
+
+  p.font;
+
+  p.preload = function () {
+    p.font = p.loadFont("AlteHaasGroteskBold.ttf");
+  };
+  p.setup = function () {
+    p.createCanvas(800, 400, p.WEBGL);
+  };
+
+  p.draw = function () {
+    p.noLoop();
+    p.background(255);
+    drawFlashArt(p);
+  };
+};

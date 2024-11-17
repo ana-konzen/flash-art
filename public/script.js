@@ -8,12 +8,10 @@ const artistList = document.getElementById("artistList");
 const artImg = document.getElementById("artImg");
 const fileLabel = document.getElementById("fileLabel");
 
-// const indexes = [];
 let artCanvas;
 
 getArtists();
-
-// const artCanvas = new p5(s);
+createMenu();
 
 imageInput.addEventListener("change", () => {
   if (imageInput.files.length === 0) {
@@ -87,38 +85,45 @@ function listArtists(artists) {
     artistList.appendChild(artistBtn);
     artistBtn.addEventListener("click", () => {
       indexes.push(index);
-      artCanvas = new p5(s);
+      artCanvas = new p5(logoLayer);
       artCanvas.allData = artists;
       artCanvas.seedNumber = 50;
-
-      // artCanvas.artData = artist;
-
-      // artCanvas.redrawCanvas();
-      createArtistInfo(artist);
+      createArtistInfo(artists);
     });
   });
 }
 
-function createArtistInfo(artist) {
-  const artistInfo = document.getElementById("artistInfo");
-  artistInfo.innerHTML = `<p class="artist">${artist.artist}</p><p>color</p>`;
-  const colorPalette = document.createElement("div");
-  colorPalette.classList.add("colorPalette");
+function createArtistInfo(artists) {
+  const artist = artists[indexes[indexes.length - 1]];
+
+  const artistName = document.getElementById("artistName");
+  const palette = document.getElementById("palette");
+  const mood = document.getElementById("mood");
+  const styles = document.getElementById("styles");
+  const shapes = document.getElementById("shapes");
+  const contrast = document.getElementById("contrast");
+
+  artistName.innerText = artist.artist;
+  palette.innerHTML = "";
   for (const color of artist.color) {
     const colorDiv = document.createElement("div");
     colorDiv.style.backgroundColor = color;
-    colorPalette.appendChild(colorDiv);
+    palette.appendChild(colorDiv);
   }
-  artistInfo.appendChild(colorPalette);
-  artistInfo.innerHTML += `<p>sentiment analysis</p>`;
-  const sentimentAnalysis = document.createElement("div");
-  sentimentAnalysis.classList.add("sentimentAnalysis");
+
+  mood.innerHTML = "";
   for (const score of artist.afinn.scores) {
-    sentimentAnalysis.innerHTML += `<p>${score.mood}: ${score.score}</p>`;
+    mood.innerHTML += `${score.mood}: ${score.score}<br>`;
   }
-  sentimentAnalysis.innerHTML += `<p class="sum">sum: ${artist.afinn.sum}</p>`;
-  artistInfo.appendChild(sentimentAnalysis);
-  artistInfo.innerHTML += `<p>style: ${artist.style[0]}, ${artist.style[1]}</p>`;
-  artistInfo.innerHTML += `<p>shape: ${artist.shape[0]}, ${artist.shape[1]}</p>`;
-  artistInfo.innerHTML += `<p>contrast: ${artist.contrast}</p>`;
+  mood.innerHTML += `&nbsp &nbsp &nbsp sum: ${artist.afinn.sum}`;
+
+  for (const style of artist.style) {
+    styles.innerHTML += `${style}<br>`;
+  }
+
+  for (const shape of artist.shape) {
+    shapes.innerHTML += `${shape}<br>`;
+  }
+
+  contrast.innerHTML = artist.contrast;
 }

@@ -1,4 +1,16 @@
 function getAssets(index, p = p5.instance) {
+  const shapes = ["circular", "organic", "sharp", "textBool", "linear", "rectangular", "geometric"];
+
+  const styles = [
+    "avantgarde",
+    "radical",
+    "minimalist",
+    "constrained",
+    "classic",
+    "expressionist",
+    "maximalist",
+    "chaotic",
+  ];
   p.sum = 0;
   p.absSum = 0;
   p.scores = [];
@@ -14,8 +26,8 @@ function getAssets(index, p = p5.instance) {
     p.absSum += Math.abs(Number(p.afinn[m]));
   }
 
-  assignAttributes(p.shapes, p.artData.shape, p);
-  assignAttributes(p.styles, p.artData.style, p);
+  assignAttributes(shapes, p.artData.shape, p);
+  assignAttributes(styles, p.artData.style, p);
 
   p.palette = p.artData.color;
   p.contrast = p.artData.contrast;
@@ -31,15 +43,12 @@ function createLayer(p = p5.instance) {
   p.push();
   brush.noField();
 
-  //   brush.set("rotring", "black", 1);
-  //   brush.rect(p.random(-100, 100), 0, 30, 30);
-
   const variance = stddev(p.scores, p);
 
-  const chaosNumber = Math.ceil(variance); //gonna use this for something!
+  const chaosNumber = Math.ceil(variance);
 
   const myBrushes = setBrushes(p);
-  p.translate(130, 150);
+  //   p.translate(130, 150);
 
   setHatch(myBrushes, variance, p);
   setFill(variance, p);
@@ -63,33 +72,43 @@ function createLayer(p = p5.instance) {
 
 function drawScribble(chaosNumber, p = p5.instance) {
   const numVertex = p.absSum;
+  const margin = 50;
+  const minX = -p.width / 4 + margin;
+  const maxX = p.width / 4 - margin;
+  const minY = -p.height / 4 + margin;
+  const maxY = p.height / 4 - margin;
 
   if (p.rectangular && (p.linear || p.textBool || p.organic)) {
-    for (i = 0; i < numVertex; i++) {
+    for (let i = 0; i < numVertex; i++) {
       brush.rect(
-        p.random(400),
-        p.random(-50, 100),
+        p.random(minX, maxX),
+        p.random(minY, maxY),
         p.random(10, chaosNumber * numVertex * 5),
         p.random(10, chaosNumber * numVertex * 3)
       );
     }
   } else if (p.circular && p.geometric) {
-    for (i = 0; i < numVertex; i++) {
-      brush.circle(p.random(400), p.random(-50, 100), p.random(10, chaosNumber * numVertex * 3), true);
+    for (let i = 0; i < numVertex; i++) {
+      brush.circle(
+        p.random(minX, maxX),
+        p.random(minY, maxY),
+        p.random(10, chaosNumber * numVertex * 3),
+        true
+      );
     }
   } else if (p.rectangular && p.geometric) {
-    for (i = 0; i < numVertex; i++) {
+    for (let i = 0; i < numVertex; i++) {
       brush.rect(
-        p.random(400),
-        p.random(-50, 100),
+        p.random(minX, maxX),
+        p.random(minY, maxY),
         p.random(10, chaosNumber * numVertex * 3),
         p.random(10, chaosNumber * numVertex * 3)
       );
     }
   } else {
     brush.beginShape(1);
-    for (i = 0; i < numVertex; i++) {
-      brush.vertex(p.random(400), p.random(-50, 100));
+    for (let i = 0; i < numVertex; i++) {
+      brush.vertex(p.random(minX, maxX), p.random(minY, maxY));
     }
     brush.endShape(p.CLOSE);
   }
@@ -123,14 +142,13 @@ function configureField(p = p5.instance) {
 
 function setRandomField(p = p5.instance) {
   const randomField = p.random(brush.listFields());
-  // console.log(randomField);
   brush.field(randomField);
 }
 
 function setBleed(variance, p = p5.instance) {
   const bleedDirection = variance < 2 ? "in" : "out";
 
-  const bleed = p.map(p.sum, -25, 25, 0, 0.5); //see brush.p5 syntax for numbers
+  const bleed = p.map(p.sum, -25, 25, 0, 0.5);
 
   if ((p.organic && !p.minimalist) || (p.organic && !p.constrained)) {
     brush.bleed(bleed, bleedDirection);
@@ -160,6 +178,15 @@ function setHatch(myBrushes, variance, p = p5.instance) {
   } else {
     brush.noHatch();
   }
+}
+
+function drawFlashArt(p = p5.instance) {
+  p.textFont(p.font);
+  p.fill(0);
+  const fontSize = p.width / 8;
+  p.textSize(fontSize);
+  p.textAlign(p.CENTER);
+  p.text("flash art", 0, fontSize / 2);
 }
 
 function stddev(arr, p = p5.instance) {
