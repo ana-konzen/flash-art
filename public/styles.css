@@ -122,7 +122,11 @@ canvas {
   display: none;
 }
 
-
+#loadingMessage {
+  position: relative;
+  top: 10px;
+  display: none;
+}
 
 button, .button {
   display: inline-block;

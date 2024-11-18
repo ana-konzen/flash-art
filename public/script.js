@@ -41,6 +41,8 @@ async function sendImage() {
   reader.readAsDataURL(imageInput.files[0]);
   reader.onload = async function () {
     try {
+      const loadingMessage = document.getElementById("loadingMessage");
+      loadingMessage.style.display = "block";
       console.log("reader loaded");
       console.log(reader.result.slice(0, 50));
       const artistName = formatName(nameInput.value);
@@ -71,6 +73,7 @@ async function getArtists() {
   createArtistInfo(artists);
   listArtists(artists);
   createGenerator(artists);
+  loadingMessage.style.display = "none";
 }
 
 function listArtists(artists) {
