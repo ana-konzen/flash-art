@@ -6,7 +6,19 @@ const saveImage = document.getElementById("saveImage");
 
 const artImg = document.getElementById("artImg");
 
-const randomSeed = Math.floor(Math.random() * 9999999);
+const randomSeedLabel = document.getElementById("randomSeedLabel");
+const randomSeedSlider = document.getElementById("randomSeed");
+
+randomSeedSlider.value = Math.floor(Math.random() * 9999);
+let randomSeed = randomSeedSlider.value;
+randomSeedLabel.innerText = `seed: ${randomSeedSlider.value}`;
+
+randomSeedSlider.oninput = function () {
+  randomSeed = randomSeedSlider.value;
+  randomSeedLabel.innerText = `seed: ${randomSeed}`;
+  artCanvas.seedNumber = randomSeed;
+  artCanvas.redraw();
+};
 
 let artCanvas;
 

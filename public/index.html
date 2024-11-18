@@ -50,7 +50,11 @@
             <div id="plusCol" class="sign row"></div>
             <div id="labelCol" class="artist row"></div>
         </div>
-            <button id="clearButton" class="button">clear layer</button>
+        <div id="seedSlider">
+          <label for="randomSeed" id="randomSeedLabel" class="copy">random seed</label>
+          <input type="range" id="randomSeed" min="1" max="9999" value="500">
+        </div>
+        <button id="clearButton" class="button">clear layer</button>
       </div>
       <div id="saveCont" class="container">
         <p class="copy">file name<input id="fileName" type="text" value="flash-art"/></p>

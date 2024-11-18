@@ -21,15 +21,16 @@ const logoLayer = function (p) {
     p.createCanvas(800, 400, p.WEBGL);
     p.angleMode(p.DEGREES);
     brush.load();
-    brush.colorCache(false);
+    // brush.colorCache(false);
     p.noStroke();
   };
 
   p.draw = function () {
+    p.noLoop();
+
     p.randomSeed(p.seedNumber);
     brush.seed(p.seedNumber);
 
-    p.noLoop();
     p.background(255);
 
     drawFlashArt(p);
