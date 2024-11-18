@@ -20,7 +20,7 @@ const logoLayer = function (p) {
   p.setup = function () {
     p.createCanvas(900, 600, p.WEBGL);
     p.angleMode(p.DEGREES);
-    p.imageMode(p.CENTER);
+    // p.imageMode(p.CENTER);
 
     brush.load();
     // brush.colorCache(false);
@@ -35,7 +35,7 @@ const logoLayer = function (p) {
 
     p.background(255);
 
-    p.image(p.logo, 0, 0, p.logo.width / 6, p.logo.height / 6);
+    p.image(p.logo, -p.width / 5, -p.height / 7, p.logo.width / 6, p.logo.height / 6);
 
     for (const index of indexes) {
       getAssets(index, p);
@@ -63,12 +63,11 @@ const clearCanvas = function (p) {
   };
   p.setup = function () {
     p.createCanvas(900, 600, p.WEBGL);
-    p.imageMode(p.CENTER);
   };
 
   p.draw = function () {
     p.noLoop();
     p.background(255);
-    p.image(p.logo, 0, 0, p.logo.width / 6, p.logo.height / 6);
+    p.image(p.logo, -p.width / 5, -p.height / 7, p.logo.width / 6, p.logo.height / 6);
   };
 };
