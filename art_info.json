@@ -1,0 +1,53 @@
+{
+  "mood": [
+    "joy",
+    "trust",
+    "hope",
+    "peace",
+    "love"
+  ],
+  "color": [
+    "#7B9F35",
+    "#8CBD99",
+    "#F7E3A4",
+    "#A4A095",
+    "#5B846C"
+  ],
+  "shape": [
+    "organic",
+    "circular"
+  ],
+  "style": [
+    "expressionist",
+    "classic"
+  ],
+  "contrast": "low",
+  "artist": "claude monet",
+  "afinn": {
+    "sum": 11,
+    "absSum": 11,
+    "scores": [
+      {
+        "mood": "joy",
+        "score": 3
+      },
+      {
+        "mood": "trust",
+        "score": 1
+      },
+      {
+        "mood": "hope",
+        "score": 2
+      },
+      {
+        "mood": "peace",
+        "score": 2
+      },
+      {
+        "mood": "love",
+        "score": 3
+      }
+    ]
+  },
+  "timestamp": "2024-11-18T06:09:27.345Z"
+}

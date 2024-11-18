@@ -17,15 +17,14 @@ createMenu();
 
 imageInput.addEventListener("change", () => {
   if (imageInput.files.length === 0) {
-    console.log("No image uploaded");
+    console.log("no image uploaded");
   } else {
-    console.log("Image uploaded");
+    console.log("image uploaded");
   }
 });
 
 sendElement.addEventListener("click", async () => {
   if (imageInput.files.length === 0 || nameInput.value === "") {
-    console.log("No image uploaded");
     const errorMessage = document.getElementById("errorMessage");
     errorMessage.style.display = "block";
   } else {
@@ -65,15 +64,11 @@ async function sendImage() {
       const loadingMessage = document.getElementById("loadingMessage");
       loadingMessage.style.display = "block";
       console.log("reader loaded");
-      console.log(reader.result.slice(0, 50));
       const artistName = formatName(nameInput.value);
       const response = await fetch("/api/image", {
         method: "POST",
         body: JSON.stringify({ image: reader.result, artist: artistName }),
       });
-      const artData = await response.json();
-
-      console.log(artData);
 
       await getArtists();
     } catch (error) {
@@ -177,7 +172,6 @@ function createGenerator(artists) {
 
 function createArtistInfo(artists) {
   const artist = artists[indexes[indexes.length - 1]];
-  console.log(artist);
 
   const artistName = document.getElementById("artistName");
   const palette = document.getElementById("palette");

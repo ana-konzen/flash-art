@@ -18,12 +18,12 @@ const example = getExample();
 await kv.set(["art_info", example.artist], example);
 
 const artists = await kv.list({ prefix: ["art_info"] });
-console.log(artists);
+// console.log(artists);
 
-for await (const artist of artists) {
-  console.log(artist.key);
-  console.log(artist.value);
-}
+// for await (const artist of artists) {
+//   console.log(artist.key);
+//   console.log(artist.value);
+// }
 
 router.get("/api/artists", async (ctx) => {
   const artists = await kv.list({ prefix: ["art_info"] });
@@ -51,9 +51,7 @@ router.post("/api/image", async (ctx) => {
   console.log(imageURL.slice(0, 50));
   console.log(data.artist);
   const artInfo = await analyzeImage(imageURL, data.artist);
-  const result = await kv.set(["art_info", data.artist], artInfo);
-  console.log(result);
-
+  await kv.set(["art_info", data.artist], artInfo);
   ctx.response.body = artInfo;
 });
 
