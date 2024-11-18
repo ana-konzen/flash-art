@@ -189,15 +189,6 @@ function setHatch(myBrushes, variance, p = p5.instance) {
   }
 }
 
-function drawFlashArt(p = p5.instance) {
-  p.textFont(p.font);
-  p.fill(0);
-  const fontSize = p.width / 8;
-  p.textSize(fontSize);
-  p.textAlign(p.CENTER);
-  p.text("flash art", 0, fontSize / 2);
-}
-
 function stddev(arr, p = p5.instance) {
   let avg = arr.reduce((acc, c) => acc + c, 0) / arr.length;
   let variance = arr.reduce((acc, c) => acc + (c - avg) ** 2, 0) / arr.length;
