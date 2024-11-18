@@ -14,8 +14,8 @@ const logoLayer = function (p) {
   p.font;
 
   p.preload = function () {
-    p.afinn = p.loadJSON("afinn.json");
-    p.font = p.loadFont("AlteHaasGroteskBold.ttf");
+    p.afinn = p.loadJSON("assets/afinn.json");
+    p.font = p.loadFont("assets/AlteHaasGroteskBold.ttf");
   };
   p.setup = function () {
     p.createCanvas(900, 600, p.WEBGL);
