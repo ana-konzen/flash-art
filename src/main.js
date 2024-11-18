@@ -127,7 +127,7 @@ async function analyzeImage(imageURL, artistName) {
               description: "Two keywords describing the shapes prominent in the artwork.",
               items: {
                 type: "string",
-                enum: ["circular", "organic", "sharp", "text", "linear", "rectangular", "geometric"],
+                enum: ["circular", "organic", "sharp", "linear", "rectangular", "geometric"],
               },
             },
             style: {

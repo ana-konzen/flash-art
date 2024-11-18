@@ -7,61 +7,44 @@
 canvas {
   position: fixed;
   top: 100px;
-  left: 300px;
-  border: solid black 1px;
+  right: 100px;
+  /* border: solid black 1px; */
 }
 
 #options {
+  position: fixed;
+  left: 20px;
+  top: 20px;
   z-index: 2;
   position: fixed;
   display: block;
 }
 
-#loading {
+#menu {
   position: fixed;
-  width: 50px;
-  height: 50px;
-  left: 66vw;
-  top: 50vh;
-  transform: translate(-50%, -50%);
-  transition: 0.1s;
-  background: black;
-  animation: rotate 2s infinite;
-  display: none;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-#generatorCont {
+  left: 20px;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 600px;
+  z-index: 2;
+  top: 50px;
 }
 
-#column1 {
+
+#genColumn {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  align-items: center;
 }
 
-#column2 {
-  width: 100%;
-  /* background: red; */
-  display: flex;
-  justify-content: center;
 
+#clearButton {
+  position: relative;
+  margin-top: 20px;
 }
 
 .row {
   display: flex;
-  /* background: red; */
   flex-flow: column;
   height: 100%;
   position: relative;
@@ -71,6 +54,28 @@ canvas {
   width: 30px;
 }
 
+.sign button {
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  justify-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 50%;
+}
+
+
+
+.disabled {
+  cursor: default;
+  opacity: 20%;
+}
 
 
 .artist {
@@ -81,22 +86,22 @@ canvas {
 
 .artist div {
   margin: 5px;
-  height: 26px;
-  background-color: white;
+  /* height: 26px; */
   display: flex;
   align-content: center; 
   align-items: center;
   text-align: left;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   padding: 2px;
 }
 
 
 
-#formCont {
-  height: 160px;
+
+
+#formCont > * {
+  margin-top: 10px;
 }
 
 .container {
@@ -104,6 +109,7 @@ canvas {
   /* top: 150px; */
   /* position: relative; */
   padding: 10px;
+  background: white;
   margin-right: 5px;
 }
 
@@ -111,42 +117,26 @@ canvas {
   color: red;
   position: relative;
   height: 50px;
-  left: 70px;
-  top: -45px;
+  /* left: 70px; */
+  top: 10px;
   display: none;
 }
 
 
 
-
-input[type="file"] {
-  display: none;
-}
-
-#menu {
-  position: relative;
-  /* left: 20px; */
-  display: flex;
-  width: 450px;
-  /* justify-content: space-between;
-  justify-items: space-between; */
-  flex-flow: row;
-  top: 50px;
-}
 button, .button {
   display: inline-block;
   padding: 4px 8px;
   cursor: pointer;
- 
   border: none;
-  /* color: #ede3d3; */
   background-color: white;
   border: solid black 1px;
   font-size: 12px;
   font-family: "neue-haas-grotesk-text", sans-serif;
   font-weight: 500;
 }
-button:hover, .button:hover {
+
+.button:hover {
   background: black;
   color: white;
 }
@@ -154,6 +144,33 @@ button:hover, .button:hover {
 #infoCont {
   width: 150px;
   height: 595px;
+}
+
+input[type=text]{
+  padding: 2px;
+  margin-left: 5px;
+  border-radius: 0px;
+  border: solid 1px gray;
+}
+
+#imageType {
+  font-family: "neue-haas-grotesk-text", sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  border-radius: 0;
+}
+
+#fileName {
+  width: 90px;
+}
+
+#saveCont {
+  width: 170px;
+  height: 130px;
+}
+
+#saveCont > * {
+  margin-top: 10px;
 }
 
 #infoCont p {
@@ -177,22 +194,6 @@ button:hover, .button:hover {
   margin-bottom: 10px;
 }
 
-
-/* #artistList {
-  margin-top: 50px;
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-} */
-
-#artistList {
-  display: flex;
-  flex-flow: column;
-}
-#artistList button {
-  margin-bottom: 5px;
-}
-
 #artistInfo {
   display: flex;
   flex-direction: column;
@@ -212,20 +213,6 @@ button:hover, .button:hover {
   margin-bottom: 20px;
 }
 
-.sentimentAnalysis {
-  margin-top: -10px;
-}
-
-.sentimentAnalysis p {
-  position: relative;
-  left: 20px;
-  line-height: 5px;
-}
-
-.sentimentAnalysis .sum {
-  position: relative;
-  left: 80px;
-}
 
 #palette div {
   width: 22px;
@@ -234,25 +221,32 @@ button:hover, .button:hover {
   margin-right: 2px;
 }
 
-.selected {
-  background: black;
-  color: white;
+#artistList {
+  width: 200px;
 }
 
 #artistList button {
-  background: none;
+  /* background: none; */
   border: none;
   cursor: pointer;
-  margin-bottom: 10px;
-  font-size: 14px;
+  width: 100%;
+  font-size: 12px;
+  margin-bottom: 5px;
 
 }
 
 #artistList button:hover {
-  opacity: 0.5;
+  background: black;
+  color: white;
 }
 
-.copy {
+.selected {
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+.copy, p {
   font-family: "neue-haas-grotesk-text", sans-serif;
   font-weight: 500;
   font-style: normal;

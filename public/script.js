@@ -1,11 +1,12 @@
 const sendElement = document.getElementById("send");
 const imageInput = document.getElementById("imageInput");
 const loadingBuffer = document.getElementById("loading");
-const artistFirstName = document.getElementById("artistFirstName");
-const artistLastName = document.getElementById("artistLastName");
+const nameInput = document.getElementById("nameInput");
+const saveImage = document.getElementById("saveImage");
 
 const artImg = document.getElementById("artImg");
-const fileLabel = document.getElementById("fileLabel");
+
+const randomSeed = Math.floor(Math.random() * 9999999);
 
 let artCanvas;
 
@@ -15,25 +16,25 @@ createMenu();
 imageInput.addEventListener("change", () => {
   if (imageInput.files.length === 0) {
     console.log("No image uploaded");
-    fileLabel.style.background = "red";
-    fileLabel.innerHTML = "error";
   } else {
     console.log("Image uploaded");
-    fileLabel.style.background = "green";
-    fileLabel.innerHTML = "uploaded";
   }
 });
 
 sendElement.addEventListener("click", async () => {
-  artImg.src = "";
-  loadingBuffer.style.display = "block";
-
-  if (imageInput.files.length === 0) {
+  if (imageInput.files.length === 0 || nameInput.value === "") {
     console.log("No image uploaded");
+    const errorMessage = document.getElementById("errorMessage");
+    errorMessage.style.display = "block";
   } else {
+    errorMessage.style.display = "none";
     await sendImage();
   }
 });
+
+saveImage.onclick = function () {
+  saveLogo();
+};
 
 async function sendImage() {
   const reader = new FileReader();
@@ -42,24 +43,24 @@ async function sendImage() {
     try {
       console.log("reader loaded");
       console.log(reader.result.slice(0, 50));
-      const artistName =
-        artistFirstName.value.toLowerCase().trim() + " " + artistLastName.value.toLowerCase().trim();
+      const artistName = formatName(nameInput.value);
       const response = await fetch("/api/image", {
         method: "POST",
         body: JSON.stringify({ image: reader.result, artist: artistName }),
       });
       const artData = await response.json();
-      console.log(artData);
 
-      fileLabel.style.background = "black";
-      fileLabel.innerHTML = "choose file";
-      loadingBuffer.style.display = "none";
+      console.log(artData);
 
       await getArtists();
     } catch (error) {
       console.error(error);
     }
   };
+}
+
+function formatName(name) {
+  return name.trim().toLowerCase();
 }
 
 async function getArtists() {
@@ -75,12 +76,27 @@ async function getArtists() {
 function listArtists(artists) {
   const artistList = document.getElementById("artistList");
   artistList.innerHTML = "";
+  const lastIndex = indexes[indexes.length - 1];
   artists.forEach((artist, index) => {
     const artistBtn = document.createElement("button");
+    artistBtn.classList.add("artistBtn");
     artistBtn.innerHTML = artist.artist;
     artistBtn.classList.add("copy");
     artistList.appendChild(artistBtn);
+    if (index === lastIndex) {
+      artistBtn.classList.add("selected");
+      artistBtn.innerHTML = `${artist.artist} (click to redraw)`;
+      artCanvas = new p5(logoLayer);
+      artCanvas.allData = artists;
+      artCanvas.seedNumber = Math.floor(Math.random() * 9999999);
+    }
     artistBtn.addEventListener("click", () => {
+      const artButtons = document.getElementsByClassName("artistBtn");
+      for (const btn of artButtons) {
+        btn.classList.remove("selected");
+      }
+      artistBtn.classList.add("selected");
+      artistBtn.innerHTML = `${artist.artist} (click to redraw)`;
       indexes = [index];
       artCanvas = new p5(logoLayer);
       artCanvas.allData = artists;
@@ -100,6 +116,7 @@ function createGenerator(artists) {
   artists.forEach((artist, index) => {
     const artistLabel = document.createElement("div");
     artistLabel.innerHTML = artist.artist;
+    artistLabel.classList.add("copy");
     labelCol.appendChild(artistLabel);
     const plusButton = document.createElement("button");
     plusButton.innerHTML = "+";
@@ -114,7 +131,7 @@ function createGenerator(artists) {
       indexes.push(index);
       artCanvas = new p5(logoLayer);
       artCanvas.allData = artists;
-      artCanvas.seedNumber = 50;
+      artCanvas.seedNumber = randomSeed;
       createArtistInfo(artists);
       minusButton.disabled = false;
       minusButton.classList.remove("disabled");
@@ -124,7 +141,7 @@ function createGenerator(artists) {
       indexes.pop();
       artCanvas = new p5(logoLayer);
       artCanvas.allData = artists;
-      artCanvas.seedNumber = 50;
+      artCanvas.seedNumber = randomSeed;
       if (indexes.length > 0) {
         createArtistInfo(artists);
       }
@@ -172,4 +189,14 @@ function createArtistInfo(artists) {
   }
 
   contrast.innerHTML = artist.contrast;
+}
+
+function saveLogo() {
+  const imageType = document.getElementById("imageType");
+  let selectedType = imageType.value;
+  imageType.onchange = function () {
+    selectedType = imageType.value;
+  };
+  const fileName = document.getElementById("fileName");
+  artCanvas.saveCanvas(fileName.value, selectedType);
 }

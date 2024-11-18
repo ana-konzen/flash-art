@@ -78,7 +78,10 @@ function drawScribble(chaosNumber, p = p5.instance) {
   const minY = -p.height / 4 + margin;
   const maxY = p.height / 4 - margin;
 
-  if (p.rectangular && (p.linear || p.textBool || p.organic)) {
+  if (
+    ((p.rectangular || p.linear || p.sharp) && (p.linear || p.organic || p.sharp)) ||
+    (p.geometric && p.linear)
+  ) {
     for (let i = 0; i < numVertex; i++) {
       brush.rect(
         p.random(minX, maxX),
@@ -105,6 +108,12 @@ function drawScribble(chaosNumber, p = p5.instance) {
         p.random(10, chaosNumber * numVertex * 3)
       );
     }
+  } else if (p.organic && p.sharp) {
+    brush.beginShape(0);
+    for (let i = 0; i < numVertex; i++) {
+      brush.vertex(p.random(minX, maxX), p.random(minY, maxY));
+    }
+    brush.endShape(p.CLOSE);
   } else {
     brush.beginShape(1);
     for (let i = 0; i < numVertex; i++) {

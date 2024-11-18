@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Art Analyzer</title>
+    <title>Flash Art</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -17,17 +17,15 @@
       <button id="uploadButton">upload artist</button>
       <button id="listButton">artist list</button>
       <button id="genButton">generator</button>
+      <button id="saveButton">save</button>
   </div>
 
-    <div id="loading"></div>
 
     <div id = "menu">
       <div id="formCont" class="container"> 
-        <p class="copy">artist first name<input id="artistFirstName" type="text"  /></p>
-        <p class="copy">artist last name<input id="artistLastName" type="text"  /></p>
-        <label for="imageInput" class="button" id="fileLabel">choose file</label>
-        <input id="imageInput" type="file" accept="image/png, image/jpeg" />
-        <button id="send" class="button copy">send</button>
+        <p class="copy">artist name<input id="nameInput" type="text"  /></p>
+        <input id="imageInput" type="file" accept="image/png, image/jpeg, image/webp" />
+        <br><button id="send" class="button copy">send</button>
         <p id="errorMessage">oops! please make sure all fields <br> are filled correctly</p>
        </div>
        <div id="infoCont" class="container">
@@ -46,16 +44,23 @@
     </div>
        <div id="artistList" class="container"></div>
        <div id="generatorCont" class="container">
-        <div id="column1">
+        <div id="genColumn">
             <div id="minusCol" class="sign row"></div>
             <div id="plusCol" class="sign row"></div>
             <div id="labelCol" class="artist row"></div>
         </div>
-        <div id="column2">
-            <button id="clearButton">clear layer</button>
-        </div>
+            <button id="clearButton" class="button">clear layer</button>
       </div>
-     
+      <div id="saveCont" class="container">
+        <p class="copy">file name<input id="fileName" type="text" value="flash-art"/></p>
+        <label class="copy" for="imageType">image type</label>
+        <select id="imageType">
+          <option value="png">png</option>
+          <option value="jpg">jpg</option>
+          <option value="webp">webp</option>
+        </select>
+        <button id="saveImage" class="button copy">save</button>
+      </div>
     </div>
 
 
