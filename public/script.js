@@ -141,14 +141,14 @@ function createGenerator(artists) {
     });
 
     minusButton.addEventListener("click", () => {
-      indexes.pop();
+      indexes.splice(indexes.lastIndexOf(index), 1);
       artCanvas = new p5(logoLayer);
       artCanvas.allData = artists;
       artCanvas.seedNumber = randomSeed;
       if (indexes.length > 0) {
         createArtistInfo(artists);
       }
-      if (indexes.length < 1) {
+      if (indexes.lastIndexOf(index) === -1) {
         minusButton.disabled = true;
         minusButton.classList.add("disabled");
       }
