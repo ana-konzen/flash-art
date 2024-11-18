@@ -2,30 +2,30 @@
   "mood": [
     "happy",
     "joy",
-    "interest",
-    "fun",
-    "love"
+    "excited",
+    "amused",
+    "surprise"
   ],
   "color": [
-    "#FF4081",
-    "#FFEB3B",
-    "#00BCD4",
-    "#E91E63",
-    "#4CAF50"
+    "#FF007F",
+    "#FFD700",
+    "#00FF00",
+    "#00FFFF",
+    "#FF4500"
   ],
   "shape": [
     "rectangular",
     "sharp"
   ],
   "style": [
-    "radical",
+    "avant-garde",
     "maximalist"
   ],
   "contrast": "high",
   "artist": "andy warhol",
   "afinn": {
-    "sum": 14,
-    "absSum": 14,
+    "sum": 12,
+    "absSum": 12,
     "scores": [
       {
         "mood": "happy",
@@ -36,18 +36,18 @@
         "score": 3
       },
       {
-        "mood": "interest",
-        "score": 1
-      },
-      {
-        "mood": "fun",
-        "score": 4
-      },
-      {
-        "mood": "love",
+        "mood": "excited",
         "score": 3
+      },
+      {
+        "mood": "amused",
+        "score": 3
+      },
+      {
+        "mood": "surprise",
+        "score": 0
       }
     ]
   },
-  "timestamp": "2024-11-18T00:03:58.585Z"
+  "timestamp": "2024-11-18T00:13:25.089Z"
 }
