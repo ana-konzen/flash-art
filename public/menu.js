@@ -6,6 +6,7 @@ async function createMenu() {
     list: document.getElementById("artistList"),
     generator: document.getElementById("generatorCont"),
     save: document.getElementById("saveCont"),
+    seed: document.getElementById("seedCont"),
   };
 
   const buttons = {
@@ -16,11 +17,11 @@ async function createMenu() {
     save: document.getElementById("saveButton"),
   };
 
-  hideAllExcept([containers.info]);
+  hideAllExcept([containers.info, containers.seed]);
   buttons.info.classList.add("selected");
 
   buttons.info.onclick = function () {
-    hideAllExcept([containers.info, containers.list, containers.generator, containers.save]);
+    hideAllExcept([containers.info, containers.list, containers.generator, containers.save, containers.seed]);
     deselectAllExcept([buttons.info, buttons.list, buttons.generator, buttons.save]);
     toggleSelect("info");
   };
@@ -32,21 +33,27 @@ async function createMenu() {
   };
 
   buttons.list.onclick = function () {
-    hideAllExcept([containers.list, containers.info, containers.save]);
+    hideAllExcept([containers.list, containers.info, containers.save, containers.seed]);
     deselectAllExcept([buttons.list, buttons.info, buttons.save]);
     toggleSelect("list");
+    containers.seed.style.display = "block";
   };
 
   buttons.generator.onclick = function () {
-    hideAllExcept([containers.generator, containers.info, containers.save]);
+    hideAllExcept([containers.generator, containers.info, containers.save, containers.seed]);
     deselectAllExcept([buttons.generator, buttons.info, buttons.save]);
     new p5(clearCanvas);
     indexes = [];
+    const artButtons = document.getElementsByClassName("artistBtn");
+    for (const btn of artButtons) {
+      btn.classList.remove("selected");
+    }
     toggleSelect("generator");
+    containers.seed.style.display = "block";
   };
 
   buttons.save.onclick = function () {
-    hideAllExcept([containers.save, containers.list, containers.info, containers.generator]);
+    hideAllExcept([containers.save, containers.list, containers.info, containers.generator, containers.seed]);
     deselectAllExcept([buttons.save, buttons.list, buttons.info, buttons.generator]);
     toggleSelect("save");
   };
@@ -85,5 +92,9 @@ async function createMenu() {
     });
     indexes = [];
     new p5(clearCanvas);
+    const artButtons = document.getElementsByClassName("artistBtn");
+    for (const btn of artButtons) {
+      btn.classList.remove("selected");
+    }
   };
 }

@@ -73,10 +73,10 @@ function createLayer(p = p5.instance) {
 function drawScribble(chaosNumber, p = p5.instance) {
   const numVertex = p.absSum;
   const margin = 50;
-  const minX = -p.width / 4 + margin;
-  const maxX = p.width / 4 - margin;
-  const minY = -p.height / 4 + margin;
-  const maxY = p.height / 4 - margin;
+  const minX = -p.width / 6 + margin;
+  const maxX = p.width / 6 - margin;
+  const minY = -p.height / 6 + margin;
+  const maxY = p.height / 6 - margin;
 
   if (
     ((p.rectangular || p.linear || p.sharp) && (p.linear || p.organic || p.sharp)) ||

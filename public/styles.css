@@ -6,8 +6,9 @@
 
 canvas {
   position: fixed;
-  top: 100px;
-  right: 20vw;
+  top: 50px;
+  left: 50vw;
+  transform: translateX(-50%);
   /* border: solid black 1px; */
 }
 
@@ -19,6 +20,20 @@ canvas {
   position: fixed;
   display: block;
 }
+
+#logoCreator {
+  display: flex;
+  flex-direction: column;
+}
+
+#seedCont {
+  width: 250px;
+}
+#randomizeSeed {
+  margin-top: 10px;
+}
+
+
 
 #menu {
   position: fixed;
@@ -107,6 +122,8 @@ canvas {
   padding: 10px;
   background: white;
   margin-right: 5px;
+  margin-bottom: 5px;
+
 }
 
 #errorMessage {
@@ -144,7 +161,26 @@ button, .button {
 
 #infoCont {
   width: 150px;
-  height: 595px;
+  height: 540px;
+  padding: 5px;
+}
+
+#infoCont p {
+  font-family: "neue-haas-grotesk-text", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 12px;
+  text-align: left;
+  margin-left: 5px;
+}
+
+.titles {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.first {
+  margin-top: 10px;
 }
 
 input[type=text]{
@@ -167,19 +203,11 @@ input[type=text]{
 
 #saveCont {
   width: 170px;
-  height: 130px;
+  height: 120px;
 }
 
 #saveCont > * {
   margin-top: 10px;
-}
-
-#infoCont p {
-  font-family: "neue-haas-grotesk-text", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 12px;
-  text-align: left;
 }
 
 .items {
@@ -190,29 +218,7 @@ input[type=text]{
 
 }
 
-.titles {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
 
-#artistInfo {
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  position: fixed;
-  top: 100px;
-  right: 100px;
-}
-
-#artistInfo p {
-  font-family: "neue-haas-grotesk-text", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  text-align: left;
-  font-size: 12px;
-  margin: 0;
-  margin-bottom: 20px;
-}
 
 
 #palette div {
@@ -223,7 +229,7 @@ input[type=text]{
 }
 
 #artistList {
-  width: 200px;
+  width: 250px;
 }
 
 #artistList button {

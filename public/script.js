@@ -8,17 +8,7 @@ const artImg = document.getElementById("artImg");
 
 const randomSeedLabel = document.getElementById("randomSeedLabel");
 const randomSeedSlider = document.getElementById("randomSeed");
-
-randomSeedSlider.value = Math.floor(Math.random() * 9999);
-let randomSeed = randomSeedSlider.value;
-randomSeedLabel.innerText = `seed: ${randomSeedSlider.value}`;
-
-randomSeedSlider.oninput = function () {
-  randomSeed = randomSeedSlider.value;
-  randomSeedLabel.innerText = `seed: ${randomSeed}`;
-  artCanvas.seedNumber = randomSeed;
-  artCanvas.redraw();
-};
+const randomizeButton = document.getElementById("randomizeSeed");
 
 let artCanvas;
 
@@ -46,6 +36,25 @@ sendElement.addEventListener("click", async () => {
 
 saveImage.onclick = function () {
   saveLogo();
+};
+
+randomSeedSlider.value = Math.floor(Math.random() * 9999);
+let randomSeed = randomSeedSlider.value;
+randomSeedLabel.innerText = `seed: ${randomSeedSlider.value}`;
+
+randomSeedSlider.oninput = function () {
+  randomSeed = randomSeedSlider.value;
+  randomSeedLabel.innerText = `seed: ${randomSeed}`;
+  artCanvas.seedNumber = randomSeed;
+  artCanvas.redrawCanvas();
+};
+
+randomizeButton.onclick = function () {
+  randomSeed = Math.floor(Math.random() * 9999);
+  randomSeedSlider.value = randomSeed;
+  randomSeedLabel.innerText = `seed: ${randomSeed}`;
+  artCanvas.seedNumber = randomSeed;
+  artCanvas.redrawCanvas();
 };
 
 async function sendImage() {
@@ -100,7 +109,6 @@ function listArtists(artists) {
     artistList.appendChild(artistBtn);
     if (index === lastIndex) {
       artistBtn.classList.add("selected");
-      artistBtn.innerHTML = `${artist.artist} (click to redraw)`;
       artCanvas = new p5(logoLayer);
       artCanvas.allData = artists;
       artCanvas.seedNumber = Math.floor(Math.random() * 9999999);
@@ -111,7 +119,6 @@ function listArtists(artists) {
         btn.classList.remove("selected");
       }
       artistBtn.classList.add("selected");
-      artistBtn.innerHTML = `${artist.artist} (click to redraw)`;
       indexes = [index];
       artCanvas = new p5(logoLayer);
       artCanvas.allData = artists;

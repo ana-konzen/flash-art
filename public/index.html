@@ -30,7 +30,7 @@
         <p id="loadingMessage">loading...</p>
        </div>
        <div id="infoCont" class="container">
-        <p class="titles">artist</p>
+        <p class="titles first">artist</p>
         <p class ="items" id="artistName"></p>
         <p class="titles">color</p>
         <div class="items" id="palette"></div>
@@ -43,6 +43,7 @@
         <p class="titles">contrast</p>
         <p class="items" id="contrast"></p> 
     </div>
+    <div id="logoCreator">
        <div id="artistList" class="container"></div>
        <div id="generatorCont" class="container">
         <div id="genColumn">
@@ -50,11 +51,13 @@
             <div id="plusCol" class="sign row"></div>
             <div id="labelCol" class="artist row"></div>
         </div>
-        <div id="seedSlider">
-          <label for="randomSeed" id="randomSeedLabel" class="copy">random seed</label>
-          <input type="range" id="randomSeed" min="1" max="9999" value="500">
-        </div>
         <button id="clearButton" class="button">clear layer</button>
+        </div>
+        <div id="seedCont" class="container">
+          <label for="randomSeed" id="randomSeedLabel" class="copy">random seed</label>
+          <input type="range" id="randomSeed" min="1" max="9999" value="500"><br>
+          <button id="randomizeSeed" class="button copy">randomize</button>
+        </div>
       </div>
       <div id="saveCont" class="container">
         <p class="copy">file name<input id="fileName" type="text" value="flash-art"/></p>

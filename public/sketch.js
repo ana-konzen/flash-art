@@ -18,7 +18,7 @@ const logoLayer = function (p) {
     p.font = p.loadFont("AlteHaasGroteskBold.ttf");
   };
   p.setup = function () {
-    p.createCanvas(800, 400, p.WEBGL);
+    p.createCanvas(900, 600, p.WEBGL);
     p.angleMode(p.DEGREES);
     brush.load();
     // brush.colorCache(false);
@@ -44,6 +44,11 @@ const logoLayer = function (p) {
       brush.pop();
       p.pop();
     }
+  };
+
+  p.redrawCanvas = function () {
+    p.redraw();
+    brush.reDraw();
   };
 };
 
