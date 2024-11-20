@@ -112,7 +112,6 @@ function drawScribble(chaosNumber, variance, p = p5.instance) {
 
 function setBrush(variance, chaosLevel, p = p5.instance) {
   const myBrushes = setBrushes(p);
-  //   p.translate(130, 150);
 
   setHatch(myBrushes, variance, p);
   setStroke(myBrushes, chaosLevel, p);

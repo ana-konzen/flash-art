@@ -36,8 +36,11 @@ const logoLayer = function (p) {
 
     p.background(255);
 
+    const logoW = p.logo.width / 6;
+    const logoH = p.logo.height / 6;
+
     if (flashArtShowing) {
-      p.image(p.logo, -p.width / 5, -p.height / 7, p.logo.width / 6, p.logo.height / 6);
+      p.image(p.logo, -p.width / 5, -p.height / 7, logoW, logoH);
     }
 
     for (const index of indexes) {
@@ -45,6 +48,7 @@ const logoLayer = function (p) {
       p.push();
       brush.push();
       p.noFill();
+      p.translate(p.random(-logoW / 2, logoW / 2), p.random(-logoH / 2, logoH / 2));
       createLayer(p);
       brush.pop();
       p.pop();
