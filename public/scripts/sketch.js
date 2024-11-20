@@ -1,4 +1,5 @@
 let indexes = [];
+let flashArtShowing = true;
 
 const logoLayer = function (p) {
   brush.instance(p);
@@ -35,7 +36,9 @@ const logoLayer = function (p) {
 
     p.background(255);
 
-    p.image(p.logo, -p.width / 5, -p.height / 7, p.logo.width / 6, p.logo.height / 6);
+    if (flashArtShowing) {
+      p.image(p.logo, -p.width / 5, -p.height / 7, p.logo.width / 6, p.logo.height / 6);
+    }
 
     for (const index of indexes) {
       getAssets(index, p);
@@ -68,6 +71,8 @@ const clearCanvas = function (p) {
   p.draw = function () {
     p.noLoop();
     p.background(255);
-    p.image(p.logo, -p.width / 5, -p.height / 7, p.logo.width / 6, p.logo.height / 6);
+    if (flashArtShowing) {
+      p.image(p.logo, -p.width / 5, -p.height / 7, p.logo.width / 6, p.logo.height / 6);
+    }
   };
 };

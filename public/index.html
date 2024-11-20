@@ -15,9 +15,10 @@
   <body>
     <div id="options">
       <button id="infoButton">analysis breakdown</button>
-      <button id="uploadButton">upload artist</button>
+      <button id="settingsButton">settings</button>
       <button id="listButton">artist list</button>
       <button id="genButton">generator</button>
+      <button id="uploadButton">upload artist</button>
       <button id="saveButton">save</button>
   </div>
 
@@ -45,6 +46,15 @@
         <p class="items" id="contrast"></p> 
     </div>
     <div id="logoCreator">
+      <div id="settingsCont" class="container">
+        <label for="randomSeed" id="randomSeedLabel" class="copy">random seed</label>
+        <input type="range" id="randomSeed" min="1" max="9999" value="500"><br>
+        <button id="randomizeSeed" class="button copy">randomize</button>
+        <label id="logoCheckboxCont" class="copy">show flash art
+        <input type="checkbox" id="logoCheckbox" name="logoCheckbox" checked="checked">
+        <span class="checkmark"></span>
+        </label>
+      </div>
        <div id="artistList" class="container"></div>
        <div id="generatorCont" class="container">
         <div id="genColumn">
@@ -53,11 +63,6 @@
             <div id="labelCol" class="artist row"></div>
         </div>
         <button id="clearButton" class="button">clear layer</button>
-        </div>
-        <div id="seedCont" class="container">
-          <label for="randomSeed" id="randomSeedLabel" class="copy">random seed</label>
-          <input type="range" id="randomSeed" min="1" max="9999" value="500"><br>
-          <button id="randomizeSeed" class="button copy">randomize</button>
         </div>
       </div>
       <div id="saveCont" class="container">

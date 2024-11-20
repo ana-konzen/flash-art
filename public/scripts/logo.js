@@ -42,35 +42,17 @@ function assignAttributes(attributes, dataSource, p = p5.instance) {
 function createLayer(p = p5.instance) {
   p.push();
   brush.noField();
-
   const variance = stddev(p.scores, p);
 
-  const chaosNumber = Math.ceil(variance);
+  const chaosLevel = Math.ceil(variance);
 
-  const myBrushes = setBrushes(p);
-  //   p.translate(130, 150);
-
-  setHatch(myBrushes, variance, p);
-  setFill(variance, p);
-  let brushWidth;
-  if (p.chaotic) {
-    brushWidth = chaosNumber * 4;
-  } else if (p.minimalist || p.constrained) {
-    brushWidth = chaosNumber;
-  } else {
-    brushWidth = chaosNumber * 2;
-  }
-  brush.set(p.random(myBrushes), p.random(p.palette), brushWidth);
-  if (p.classic && !p.maximalist && !p.chaotic) {
-    brush.noStroke();
-  }
   configureField(p);
 
-  drawScribble(chaosNumber, p);
+  drawScribble(chaosLevel, variance, p);
   p.pop();
 }
 
-function drawScribble(chaosNumber, p = p5.instance) {
+function drawScribble(chaosNumber, variance, p = p5.instance) {
   const numVertex = p.absSum;
   const margin = 50;
   const minX = -p.width / 6 + margin;
@@ -83,6 +65,7 @@ function drawScribble(chaosNumber, p = p5.instance) {
     (p.geometric && p.linear)
   ) {
     for (let i = 0; i < numVertex; i++) {
+      setBrush(variance, chaosNumber, p);
       brush.rect(
         p.random(minX, maxX),
         p.random(minY, maxY),
@@ -92,6 +75,7 @@ function drawScribble(chaosNumber, p = p5.instance) {
     }
   } else if (p.circular && p.geometric) {
     for (let i = 0; i < numVertex; i++) {
+      setBrush(variance, chaosNumber, p);
       brush.circle(
         p.random(minX, maxX),
         p.random(minY, maxY),
@@ -100,6 +84,7 @@ function drawScribble(chaosNumber, p = p5.instance) {
       );
     }
   } else if (p.rectangular && p.geometric) {
+    setBrush(variance, chaosNumber, p);
     for (let i = 0; i < numVertex; i++) {
       brush.rect(
         p.random(minX, maxX),
@@ -109,18 +94,29 @@ function drawScribble(chaosNumber, p = p5.instance) {
       );
     }
   } else if (p.organic && p.sharp) {
+    setBrush(variance, chaosNumber, p);
     brush.beginShape(0);
     for (let i = 0; i < numVertex; i++) {
       brush.vertex(p.random(minX, maxX), p.random(minY, maxY));
     }
     brush.endShape(p.CLOSE);
   } else {
+    setBrush(variance, chaosNumber, p);
     brush.beginShape(1);
     for (let i = 0; i < numVertex; i++) {
       brush.vertex(p.random(minX, maxX), p.random(minY, maxY));
     }
     brush.endShape(p.CLOSE);
   }
+}
+
+function setBrush(variance, chaosLevel, p = p5.instance) {
+  const myBrushes = setBrushes(p);
+  //   p.translate(130, 150);
+
+  setHatch(myBrushes, variance, p);
+  setStroke(myBrushes, chaosLevel, p);
+  setFill(variance, p);
 }
 
 function setBrushes(p = p5.instance) {
@@ -186,6 +182,21 @@ function setHatch(myBrushes, variance, p = p5.instance) {
     brush.hatch(p.random(10, 60), hatchAngle);
   } else {
     brush.noHatch();
+  }
+}
+
+function setStroke(myBrushes, chaosNumber, p = p5.instance) {
+  let brushWidth;
+  if (p.chaotic) {
+    brushWidth = chaosNumber * 4;
+  } else if (p.minimalist || p.constrained) {
+    brushWidth = chaosNumber;
+  } else {
+    brushWidth = chaosNumber * 2;
+  }
+  brush.set(p.random(myBrushes), p.random(p.palette), brushWidth);
+  if (p.classic && !p.maximalist && !p.chaotic) {
+    brush.noStroke();
   }
 }
 

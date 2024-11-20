@@ -9,6 +9,7 @@ const artImg = document.getElementById("artImg");
 const randomSeedLabel = document.getElementById("randomSeedLabel");
 const randomSeedSlider = document.getElementById("randomSeed");
 const randomizeButton = document.getElementById("randomizeSeed");
+const logoCheckbox = document.getElementById("logoCheckbox");
 
 let artCanvas;
 
@@ -53,6 +54,11 @@ randomizeButton.onclick = function () {
   randomSeedSlider.value = randomSeed;
   randomSeedLabel.innerText = `seed: ${randomSeed}`;
   artCanvas.seedNumber = randomSeed;
+  artCanvas.redrawCanvas();
+};
+
+logoCheckbox.onchange = function () {
+  flashArtShowing = !flashArtShowing;
   artCanvas.redrawCanvas();
 };
 

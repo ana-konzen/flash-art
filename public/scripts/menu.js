@@ -2,28 +2,48 @@ async function createMenu() {
   const clearButton = document.getElementById("clearButton");
   const containers = {
     info: document.getElementById("infoCont"),
+    settings: document.getElementById("settingsCont"),
     form: document.getElementById("formCont"),
     list: document.getElementById("artistList"),
     generator: document.getElementById("generatorCont"),
     save: document.getElementById("saveCont"),
-    seed: document.getElementById("seedCont"),
   };
 
   const buttons = {
     info: document.getElementById("infoButton"),
+    settings: document.getElementById("settingsButton"),
     form: document.getElementById("uploadButton"),
     list: document.getElementById("listButton"),
     generator: document.getElementById("genButton"),
     save: document.getElementById("saveButton"),
   };
 
-  hideAllExcept([containers.info, containers.seed]);
+  hideAllExcept([containers.info, containers.settings]);
   buttons.info.classList.add("selected");
+  buttons.settings.classList.add("selected");
 
   buttons.info.onclick = function () {
-    hideAllExcept([containers.info, containers.list, containers.generator, containers.save, containers.seed]);
-    deselectAllExcept([buttons.info, buttons.list, buttons.generator, buttons.save]);
+    hideAllExcept([
+      containers.info,
+      containers.list,
+      containers.generator,
+      containers.save,
+      containers.settings,
+    ]);
+    deselectAllExcept([buttons.info, buttons.list, buttons.generator, buttons.save, buttons.settings]);
     toggleSelect("info");
+  };
+
+  buttons.settings.onclick = function () {
+    hideAllExcept([
+      containers.settings,
+      containers.info,
+      containers.list,
+      containers.generator,
+      containers.save,
+    ]);
+    deselectAllExcept([buttons.settings, buttons.info, buttons.list, buttons.generator, buttons.save]);
+    toggleSelect("settings");
   };
 
   buttons.form.onclick = function () {
@@ -33,15 +53,15 @@ async function createMenu() {
   };
 
   buttons.list.onclick = function () {
-    hideAllExcept([containers.list, containers.info, containers.save, containers.seed]);
-    deselectAllExcept([buttons.list, buttons.info, buttons.save]);
+    hideAllExcept([containers.list, containers.info, containers.save, containers.settings]);
+    deselectAllExcept([buttons.list, buttons.info, buttons.save, buttons.settings]);
     toggleSelect("list");
-    containers.seed.style.display = "block";
+    containers.settings.style.display = "block";
   };
 
   buttons.generator.onclick = function () {
-    hideAllExcept([containers.generator, containers.info, containers.save, containers.seed]);
-    deselectAllExcept([buttons.generator, buttons.info, buttons.save]);
+    hideAllExcept([containers.generator, containers.info, containers.save, containers.settings]);
+    deselectAllExcept([buttons.generator, buttons.info, buttons.save, buttons.settings]);
     new p5(clearCanvas);
     indexes = [];
     const artButtons = document.getElementsByClassName("artistBtn");
@@ -49,12 +69,18 @@ async function createMenu() {
       btn.classList.remove("selected");
     }
     toggleSelect("generator");
-    containers.seed.style.display = "block";
+    containers.settings.style.display = "block";
   };
 
   buttons.save.onclick = function () {
-    hideAllExcept([containers.save, containers.list, containers.info, containers.generator, containers.seed]);
-    deselectAllExcept([buttons.save, buttons.list, buttons.info, buttons.generator]);
+    hideAllExcept([
+      containers.save,
+      containers.list,
+      containers.info,
+      containers.generator,
+      containers.settings,
+    ]);
+    deselectAllExcept([buttons.save, buttons.list, buttons.info, buttons.generator, buttons.settings]);
     toggleSelect("save");
   };
 
