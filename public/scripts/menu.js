@@ -56,7 +56,6 @@ async function createMenu() {
     hideAllExcept([containers.list, containers.info, containers.save, containers.settings]);
     deselectAllExcept([buttons.list, buttons.info, buttons.save, buttons.settings]);
     toggleSelect("list");
-    containers.settings.style.display = "block";
   };
 
   buttons.generator.onclick = function () {
@@ -69,7 +68,6 @@ async function createMenu() {
       btn.classList.remove("selected");
     }
     toggleSelect("generator");
-    containers.settings.style.display = "block";
   };
 
   buttons.save.onclick = function () {
