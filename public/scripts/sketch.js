@@ -48,7 +48,7 @@ const logoLayer = function (p) {
       p.push();
       brush.push();
       p.noFill();
-      p.translate(p.random(-logoW / 2, logoW / 2), p.random(-logoH / 2, logoH / 2));
+      p.translate(p.random(-logoW / 2, logoW / 2), p.random(-logoH / 4, logoH / 4));
       createLayer(p);
       brush.pop();
       p.pop();
