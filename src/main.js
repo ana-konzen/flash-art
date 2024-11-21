@@ -122,7 +122,8 @@ async function analyzeImage(imageURL, artistName) {
             },
             shape: {
               type: "array",
-              description: "Two keywords describing the shapes prominent in the artwork.",
+              description:
+                "Two keywords describing the shapes prominent in the artwork -- if it's a picture of a sculpture or something similar, focus only on the sculpture itself.",
               items: {
                 type: "string",
                 enum: ["circular", "organic", "sharp", "linear", "rectangular", "geometric"],
@@ -130,7 +131,7 @@ async function analyzeImage(imageURL, artistName) {
             },
             style: {
               type: "array",
-              description: "Two keywords describing the style of the artwork.",
+              description: `Two keywords describing the style of the artwork. Think about the artist who made it: ${artistName}.`,
 
               items: {
                 type: "string",
