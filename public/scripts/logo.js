@@ -68,10 +68,11 @@ function drawScribble(chaosNumber, variance, p = p5.instance) {
   };
 
   if (
-    ((p.rectangular || p.linear || p.sharp) && (p.linear || p.sharp)) ||
     (p.geometric && p.linear) ||
     (p.rectangular && p.circular) ||
-    (p.organic && p.geometric)
+    (p.organic && p.geometric) ||
+    (p.linear && p.rectangular) ||
+    (p.sharp && p.rectangular)
   ) {
     drawShape(() =>
       brush.rect(
@@ -81,7 +82,7 @@ function drawScribble(chaosNumber, variance, p = p5.instance) {
         p.random(10, chaosNumber * numVertex * 3)
       )
     );
-  } else if ((p.circular && p.geometric) || (p.circular && p.linear)) {
+  } else if ((p.circular && p.geometric) || (p.circular && p.linear) || (p.circular && p.sharp)) {
     drawShape(() =>
       brush.circle(
         p.random(minX, maxX),
@@ -99,7 +100,11 @@ function drawScribble(chaosNumber, variance, p = p5.instance) {
         p.random(10, chaosNumber * numVertex * 3)
       )
     );
-  } else if (p.organic && (p.sharp || p.linear || p.rectangular)) {
+  } else if (
+    (p.organic && (p.sharp || p.linear || p.rectangular)) ||
+    (p.sharp && p.linear) ||
+    (p.sharp && p.geometric)
+  ) {
     console.log("organic and sharp, linear, or rectangular");
     setBrush(variance, chaosNumber, p);
     brush.beginShape(0);
