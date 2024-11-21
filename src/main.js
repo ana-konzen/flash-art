@@ -135,7 +135,7 @@ async function analyzeImage(imageURL, artistName) {
               items: {
                 type: "string",
                 enum: [
-                  "avant-garde",
+                  "avant_garde",
                   "radical",
                   "minimalist",
                   "constrained",

@@ -1,15 +1,15 @@
 function getAssets(index, p = p5.instance) {
-  const shapes = ["circular", "organic", "sharp", "textBool", "linear", "rectangular", "geometric"];
+  const shapes = ["circular", "organic", "sharp", "linear", "rectangular", "geometric"];
 
   const styles = [
-    "avantgarde",
+    "avant_garde",
     "radical",
     "minimalist",
     "constrained",
     "classic",
     "expressionist",
-    "maximalist",
     "chaotic",
+    "maximalist",
   ];
   p.sum = 0;
   p.absSum = 0;
@@ -119,7 +119,7 @@ function setBrush(variance, chaosLevel, p = p5.instance) {
 }
 
 function setBrushes(p = p5.instance) {
-  if ((p.radical || p.avantgarde) && !p.classic) {
+  if ((p.radical || avant_garde) && !p.classic) {
     return ["pen", "rotring", "marker2"];
   } else if (p.expressionist) {
     return ["marker", "marker2", "hatch_brush", "cpencil"];
@@ -133,7 +133,7 @@ function setBrushes(p = p5.instance) {
 function configureField(p = p5.instance) {
   if (p.chaotic) {
     setRandomField(p);
-  } else if (p.avantgarde || p.maximalist || p.radical || p.expressionist) {
+  } else if (avant_garde || p.maximalist || p.radical || p.expressionist) {
     if (p.minimalist || p.constrained) {
       if (p.random() < 0.3) setRandomField(p);
     } else {
@@ -165,7 +165,7 @@ function setFill(variance, p = p5.instance) {
   const opacity = p.contrast === "high" ? 255 : 100;
   brush.fill(p.random(p.palette), opacity);
   setBleed(variance, p);
-  if ((p.radical || p.avantgarde) && !p.classic) {
+  if ((p.radical || avant_garde) && !p.classic) {
     brush.noFill();
   }
 }
@@ -173,7 +173,7 @@ function setFill(variance, p = p5.instance) {
 function setHatch(myBrushes, variance, p = p5.instance) {
   const hatchAngle = p.map(variance, 0, 25, 0, 180);
 
-  if ((p.radical || p.avantgarde) && !p.classic) {
+  if ((p.radical || avant_garde) && !p.classic) {
     brush.setHatch(p.random(myBrushes), p.random(p.palette));
     brush.hatch(p.random(10, 60), hatchAngle);
   } else if (p.expressionist && !p.classic) {
