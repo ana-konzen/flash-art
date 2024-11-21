@@ -68,7 +68,7 @@ function drawScribble(chaosNumber, variance, p = p5.instance) {
   };
 
   if (
-    ((p.rectangular || p.linear || p.sharp) && (p.linear || p.organic || p.sharp)) ||
+    ((p.rectangular || p.linear || p.sharp) && (p.linear || p.sharp)) ||
     (p.geometric && p.linear) ||
     (p.rectangular && p.circular) ||
     (p.organic && p.geometric)
@@ -99,7 +99,7 @@ function drawScribble(chaosNumber, variance, p = p5.instance) {
         p.random(10, chaosNumber * numVertex * 3)
       )
     );
-  } else if (p.organic && p.sharp) {
+  } else if (p.organic && (p.sharp || p.linear || p.rectangular)) {
     setBrush(variance, chaosNumber, p);
     brush.beginShape(0);
     for (let i = 0; i < numVertex; i++) {
