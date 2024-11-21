@@ -176,7 +176,7 @@ function setFill(variance, p = p5.instance) {
   const opacity = p.contrast === "high" ? 255 : 100;
   brush.fill(p.random(p.palette), opacity);
   setBleed(variance, p);
-  if ((p.radical || p.avant_garde) && !p.classic) {
+  if ((p.radical || p.avant_garde || p.contemporary) && !p.classic) {
     brush.noFill();
   }
 }
