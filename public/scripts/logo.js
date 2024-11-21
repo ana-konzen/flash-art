@@ -100,6 +100,7 @@ function drawScribble(chaosNumber, variance, p = p5.instance) {
       )
     );
   } else if (p.organic && (p.sharp || p.linear || p.rectangular)) {
+    console.log("organic and sharp, linear, or rectangular");
     setBrush(variance, chaosNumber, p);
     brush.beginShape(0);
     for (let i = 0; i < numVertex; i++) {
