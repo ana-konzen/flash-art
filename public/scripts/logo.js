@@ -187,11 +187,11 @@ function setHatch(myBrushes, variance, p = p5.instance) {
 function setStroke(myBrushes, chaosNumber, p = p5.instance) {
   let brushWidth;
   if (p.chaotic) {
-    brushWidth = chaosNumber * 4;
-  } else if (p.minimalist || p.constrained) {
-    brushWidth = chaosNumber;
-  } else {
     brushWidth = chaosNumber * 2;
+  } else if (p.minimalist || p.constrained) {
+    brushWidth = chaosNumber / 2;
+  } else {
+    brushWidth = chaosNumber;
   }
   brush.set(p.random(myBrushes), p.random(p.palette), brushWidth);
   if (p.classic && !p.maximalist && !p.chaotic) {
