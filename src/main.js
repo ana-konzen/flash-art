@@ -131,7 +131,7 @@ async function analyzeImage(imageURL, artistName) {
             },
             style: {
               type: "array",
-              description: `Two keywords describing the style of the artwork. Think about the artist who made it: ${artistName}.`,
+              description: `Two keywords describing the style of the artwork. Think about the artist who made it: ${artistName}. Think about how much is going on in the image and how much information is being conveyed, the artist's aesthetic.`,
 
               items: {
                 type: "string",
