@@ -70,7 +70,6 @@ function drawScribble(chaosNumber, variance, p = p5.instance) {
   if (
     (p.geometric && p.linear) ||
     (p.rectangular && p.circular) ||
-    (p.organic && p.geometric) ||
     (p.linear && p.rectangular) ||
     (p.sharp && p.rectangular)
   ) {
