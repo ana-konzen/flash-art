@@ -60,41 +60,45 @@ function drawScribble(chaosNumber, variance, p = p5.instance) {
   const minY = -p.height / 6 + margin;
   const maxY = p.height / 6 - margin;
 
+  const drawShape = (shapeFunc, ...args) => {
+    for (let i = 0; i < numVertex; i++) {
+      setBrush(variance, chaosNumber, p);
+      shapeFunc(...args);
+    }
+  };
+
   if (
     ((p.rectangular || p.linear || p.sharp) && (p.linear || p.organic || p.sharp)) ||
     (p.geometric && p.linear) ||
     (p.rectangular && p.circular) ||
     (p.organic && p.geometric)
   ) {
-    for (let i = 0; i < numVertex; i++) {
-      setBrush(variance, chaosNumber, p);
+    drawShape(() =>
       brush.rect(
         p.random(minX, maxX),
         p.random(minY, maxY),
         p.random(10, chaosNumber * numVertex * 5),
         p.random(10, chaosNumber * numVertex * 3)
-      );
-    }
+      )
+    );
   } else if ((p.circular && p.geometric) || (p.circular && p.linear)) {
-    for (let i = 0; i < numVertex; i++) {
-      setBrush(variance, chaosNumber, p);
+    drawShape(() =>
       brush.circle(
         p.random(minX, maxX),
         p.random(minY, maxY),
         p.random(10, chaosNumber * numVertex * 3),
         true
-      );
-    }
+      )
+    );
   } else if (p.rectangular && p.geometric) {
-    setBrush(variance, chaosNumber, p);
-    for (let i = 0; i < numVertex; i++) {
+    drawShape(() =>
       brush.rect(
         p.random(minX, maxX),
         p.random(minY, maxY),
         p.random(10, chaosNumber * numVertex * 3),
         p.random(10, chaosNumber * numVertex * 3)
-      );
-    }
+      )
+    );
   } else if (p.organic && p.sharp) {
     setBrush(variance, chaosNumber, p);
     brush.beginShape(0);
